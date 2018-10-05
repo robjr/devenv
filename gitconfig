@@ -1,0 +1,45 @@
+[user]
+	name = Roberto Júnior
+	email = me@robertojunior.net
+[alias]
+	a = add
+	all = add .
+	allc = !git add . && git c
+	ap = add -p
+	b = branch
+	bfrom = "!f() { git fetch $1 && git checkout $1/$2 -b $3; }; f"
+	bcurrent = !git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD)
+	bremote = !git for-each-ref --format='%(upstream:remotename)' $(git symbolic-ref -q HEAD)
+	c = commit
+	ca = commit --amend
+	ck = checkout
+	d = diff
+	dc = diff --cached
+	f = fetch
+	fo = fetch origin
+	fu = fetch upstream
+	l = log --oneline
+	lme = log --author=Roberto
+	p = pull
+	r = rebase
+	rc = rebase --continue
+	ri = rebase -i
+	rtv = remote -v
+	s = status -s
+	st = stash
+	sta = stash apply
+	stl = stash list
+	stp = stash pop
+	sts = stash show
+	stc = stash clear
+	stsv = stash save
+
+	ckdev = !git bfrom $(git bremote) dev
+	web = !git remote get-url --push $(git bremote) | sed "s#git@github.com:#https://github.com/#g" | xargs open
+	pdev = pull $(git bremote) dev --rebase
+	restart = !git reset $(git bcurrent) --hard
+[core]
+	autocrlf = false
+	excludesfile = ~/.gitignore
+[pull]
+  rebase = true
