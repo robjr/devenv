@@ -27,6 +27,7 @@
 	rtv = remote -v
 	s = status -s
 	st = stash
+	stu = stash -u
 	sta = stash apply
 	stl = stash list
 	stp = stash pop
