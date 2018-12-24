@@ -25,5 +25,17 @@ function updateGitConfig() {
 alias clonerepos='cloneRepositoryOfUser'
 alias updategitconfig='updateGitConfig'
 
-####### Docker #######
+####### Docker Compose #######
 alias dc='docker-compose'
+alias dcup='docker-compose up'
+alias dcupb='docker-compose up --build'
+alias dcupr='docker-compose up --force-recreate'
+alias dcupbr='docker-compose up --build --force-recreate'
+alias dcbash='docker-compose exec $1 bash'
+alias dcupexec='dcUpAndExec'
+
+function dcUpAndExec() {
+  dcupr -d $1 && dc exec $1 bash
+}
+####### Docker #######
+#alias dbash = function dbash() { docker exec -it $1 bash }

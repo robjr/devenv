@@ -13,6 +13,7 @@
 	c = commit
 	ca = commit --amend
 	ck = checkout
+	ckb = checkout -b
 	d = diff
 	dc = diff --cached
 	f = fetch
