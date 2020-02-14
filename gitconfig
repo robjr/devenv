@@ -8,9 +8,10 @@
 	ap = add -p
 	b = branch
 	bfrom = "!f() { git fetch $1 && git checkout $1/$2 -b $3; }; f"
-	bcurrent = !git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD)
+	bcurrent = "!f() { git branch | grep '*' | awk '{print $2}'; }; f"
 	bremote = !git for-each-ref --format='%(upstream:remotename)' $(git symbolic-ref -q HEAD)
 	c = commit
+	cm = commit -m
 	ca = commit --amend
 	ck = checkout
 	ckb = checkout -b
@@ -38,6 +39,8 @@
 
 	ckdev = !git bfrom $(git bremote) dev
 	web = !git remote get-url --push $(git bremote) | sed "s#git@github.com:#https://github.com/#g" | xargs open
+	jira = !open "https://propertyguru.atlassian.net/browse/$(git bcurrent)"
+	pr = !open "https://github.com/propertyguru/guruland/pull/new/$(git bcurrent)"
 	pdev = pull $(git bremote) dev --rebase
 	restart = !git reset $(git bcurrent) --hard
 [core]
