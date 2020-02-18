@@ -8,13 +8,15 @@
 	ap = add -p
 	b = branch
 	bfrom = "!f() { git fetch $1 && git checkout $1/$2 -b $3; }; f"
-	bcurrent = "!f() { git branch | grep '*' | awk '{print $2}'; }; f"
+	bcurrent = git branch --show-current
 	bremote = !git for-each-ref --format='%(upstream:remotename)' $(git symbolic-ref -q HEAD)
 	c = commit
 	cm = commit -m
 	ca = commit --amend
 	ck = checkout
-	ckb = checkout -b
+	ck- = !git checkout $(git d --name-only | fzf)
+	ckb = !git checkout $(git branch --format='%(refname:lstrip=2)' | fzf)
+	cknb = checkout -b
 	d = diff
 	dc = diff --cached
 	f = fetch
