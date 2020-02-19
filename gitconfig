@@ -8,10 +8,11 @@
 	ap = add -p
 	b = branch
 	bfrom = "!f() { git fetch $1 && git checkout $1/$2 -b $3; }; f"
-	bcurrent = git branch --show-current
+	bcurrent = branch --show-current
 	bremote = !git for-each-ref --format='%(upstream:remotename)' $(git symbolic-ref -q HEAD)
 	c = commit
 	cm = commit -m
+	cmt = "!f() { git cm \"[$(git bcurrent)]: $1\"; }; f"
 	ca = commit --amend
 	ck = checkout
 	ck- = !git checkout $(git d --name-only | fzf)
