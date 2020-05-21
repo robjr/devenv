@@ -15,7 +15,7 @@
 	cmt = "!f() { git cm \"[$(git bcurrent)]: $1\"; }; f"
 	ca = commit --amend
 	ck = checkout
-	ck- = !git checkout $(git d --name-only | fzf)
+	ckf = !git checkout $(git d --name-only | fzf)
 	ckb = !git checkout $(git branch --format='%(refname:lstrip=2)' | fzf)
 	cknb = checkout -b
 	d = diff
@@ -25,7 +25,9 @@
 	fu = fetch upstream
 	l = log --oneline
 	lme = log --author=Roberto
-	p = pull
+	p = push
+	poc = !git push origin $(git bcurrent)
+	pocf = !git push origin $(git bcurrent) -f
 	r = rebase
 	rc = rebase --continue
 	ri = rebase -i
@@ -42,8 +44,9 @@
 
 	ckdev = !git bfrom $(git bremote) dev
 	web = !git remote get-url --push $(git bremote) | sed "s#git@github.com:#https://github.com/#g" | xargs open
+	repo = !git remote get-url --push $(git bremote) | awk -F ':' '{print $2}' | awk -F '.' '{print $1}'
 	jira = !open "https://propertyguru.atlassian.net/browse/$(git bcurrent)"
-	pr = !open "https://github.com/propertyguru/guruland/pull/new/$(git bcurrent)"
+	pr = !open "https://github.com/$(git repo)/pull/new/$(git bcurrent)"
 	pdev = pull $(git bremote) dev --rebase
 	restart = !git reset $(git bcurrent) --hard
 [core]
